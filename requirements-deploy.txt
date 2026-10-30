@@ -1,0 +1,12 @@
+# 배포용 경량 의존성 (Cloud Run)
+# 데모 핵심(추천·지도·피드백·GPT 재랭킹·MCP·날씨·축제)에 필요한 것만.
+# RAG(규정 검색)의 torch/faiss/sentence-transformers 는 제외 → 빌드 빠르고 안정적.
+#   (규정 검색은 지연 import + 안전 폴백 처리돼 있어 없어도 앱은 정상 동작)
+# ※ fastmcp 3.4 가 uvicorn>=0.35 를 요구 → uvicorn 핀 제거(범위)로 충돌 방지
+fastapi>=0.115
+uvicorn[standard]>=0.35
+openai>=1.51
+python-dotenv
+fastmcp>=3.4
+fastapi-mcp>=0.4
+certifi

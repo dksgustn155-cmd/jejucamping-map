@@ -1,0 +1,16 @@
+{
+  "_comment": "차박 적합도 가중치 (scoring-design.md §4). 우선순위: 한적함(_seclusion, 코드 하드코딩) 1순위 > 풍경(sea/nature_view) 2순위 > 화장실 3순위. 주간 배치(learn_weekly)가 갱신할 수 있음.",
+  "base": 15,
+  "restroom": { "d150": 12, "d300": 8, "d500": 4 },
+  "restroom_24h": 3,
+  "sea_view": { "d500": 24, "d1000": 17 },
+  "nature_view": 22,
+  "ev": { "d1000": 12, "fast_bonus": 5 },
+  "flood": { "grade1": -20, "grade2": -10 },
+  "cctv_500": 3,
+  "pharmacy_3000": 3,
+  "cleanhouse_500": 2,
+  "festival_active_1000": -8,
+  "natural_park": -50,
+  "structure_roadside": -15
+}

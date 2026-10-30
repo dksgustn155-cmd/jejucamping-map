@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>숲으로 바다로 — 공공데이터 캠핑·차박 안내</title>
+  <!-- PWA: 홈화면 설치형 앱 (manifest + 서비스워커는 app.js에서 등록) -->
+  <link rel="manifest" href="/static/manifest.webmanifest" />
+  <meta name="theme-color" content="#2d7d46" />
+  <link rel="apple-touch-icon" href="/static/icons/icon-192.png" />
+  <link rel="stylesheet" as="style" crossorigin
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+  <!-- ?v= : CSS/JS 캐시 버스팅 — 파일 수정 시 숫자 올리기 -->
+  <link rel="stylesheet" href="/static/style.css?v=33" />
+  <!-- 카카오 JS 키 주입 (서버 /config.js) -->
+  <script src="/config.js"></script>
+</head>
+<body>
+  <div id="app">
+    <!-- ── 랜딩(기본 화면): 좌=숲, 우=바다 사진 배경 + 글래스 카드. 지도는 숨김 ── -->
+    <section id="chat-section">
+      <!-- 배경: 반은 숲, 반은 바다 (Unsplash, 무료 라이선스) -->
+      <div id="scenery" aria-hidden="true">
+        <div class="half forest-bg"></div>
+        <div class="half sea-bg"></div>
+      </div>
+
+      <div id="landing-card">
+        <div id="brand">
+          <div class="logo" aria-hidden="true">
+            <svg viewBox="0 0 96 96" width="86" height="86" role="img">
+              <defs>
+                <linearGradient id="gF" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#4caf6d"/><stop offset="1" stop-color="#1f5a34"/>
+                </linearGradient>
+                <linearGradient id="gS" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#35b6d9"/><stop offset="1" stop-color="#0c6d89"/>
+                </linearGradient>
+                <clipPath id="cL"><rect x="0" y="0" width="48" height="96"/></clipPath>
+                <clipPath id="cR"><rect x="48" y="0" width="48" height="96"/></clipPath>
+              </defs>
+              <!-- 반원 배경: 좌 숲 / 우 바다 -->
+              <g clip-path="url(#cL)"><circle cx="48" cy="48" r="46" fill="url(#gF)"/></g>
+              <g clip-path="url(#cR)"><circle cx="48" cy="48" r="46" fill="url(#gS)"/></g>
+              <!-- 소나무 (좌) -->
+              <path fill="#fff" d="M27 14 L38 32 H32.5 L42 49 H35 L45 66 H9 L19 49 H12 L21.5 32 H16 Z"/>
+              <rect x="24.5" y="66" width="5" height="9" rx="1.5" fill="#fff"/>
+              <!-- 파도 (우) -->
+              <g stroke="#fff" stroke-width="4.5" fill="none" stroke-linecap="round">
+                <path d="M54 40 Q60 34 66 40 T78 40 T90 40"/>
+                <path d="M54 54 Q60 48 66 54 T78 54 T90 54"/>
+                <path d="M58 68 Q63 62 68 68 T78 68"/>
+              </g>
+              <!-- 경계선 + 링 -->
+              <line x1="48" y1="5" x2="48" y2="91" stroke="rgba(255,255,255,.5)" stroke-width="1.5"/>
+              <circle cx="48" cy="48" r="44.5" fill="none" stroke="rgba(255,255,255,.85)" stroke-width="2.5"/>
+            </svg>
+          </div>
+          <h1><b class="forest">숲으로</b> <b class="sea">바다로</b></h1>
+          <span class="feat">공공데이터 × feat. 제주</span>
+          <p class="tagline">도시를 떠나 자연을 만끽하고 싶은 여러분 —<br/>
+            떠나고 싶은 곳을 입력해 보세요. 필요한 정보는 다 알려드릴게요.</p>
+        </div>
+
+        <div id="chat-log"></div>
+
+        <form id="chat-form">
+          <span class="search-icon">🔍</span>
+          <input id="chat-input" type="text" autocomplete="off"
+                 placeholder="예: 이번 주말 전남 담양 2박 3일, 아이들이랑 계곡 근처로 가고 싶어" />
+          <button type="submit" aria-label="보내기">➤</button>
+        </form>
+
+        <div id="chips"><!-- JS가 예상 질문 중 4개 랜덤 표시 --></div>
+
+        <p id="brag">전국 공공데이터 <b id="brag-total">86,723</b>건 준비 완료
+          <span id="brag-detail">화장실 59,768 · 공영주차장 17,007 · 전기차 충전소 3,229 · 야영장 3,023 외 7종</span>
+        </p>
+
+        <button id="open-map" type="button">🗺️ 직접 지도에서 찾아보기</button>
+      </div>
+    </section>
+
+    <!-- ── 시나리오 페이지: 질문 확인 + 필요 시설 선택 → 추천 (User flow 2단계) ── -->
+    <section id="scenario-section">
+      <div id="scenario-card">
+        <button id="scenario-back" type="button">← 다시 입력</button>
+        <h2>어떤 편의시설이 필요하세요?</h2>
+        <p class="sc-sub">질문을 분석해 미리 골라뒀어요 — 자유롭게 바꿔주세요.</p>
+
+        <label class="sc-label" for="scenario-q">내 질문</label>
+        <textarea id="scenario-q" rows="2" placeholder="예: 서귀포 바다 보이는 조용한 차박지 알려줘"></textarea>
+
+        <div id="scenario-cats"><!-- JS가 카테고리 카드 11종 생성 --></div>
+
+        <p id="scenario-err"></p>
+        <button id="scenario-go" type="button">🔍 추천 받기</button>
+      </div>
+    </section>
+
+    <!-- ── 지도 화면 (추천 결과 / 직접 탐색) ── -->
+    <section id="map-section">
+      <div id="map"></div>
+
+      <button id="map-back" type="button" title="검색으로 돌아가기">← 검색으로</button>
+
+      <!-- 모바일 전용 (네이버지도 스타일): 상단 검색바 + 카테고리 칩 + 바텀시트 -->
+      <div id="map-topbar" role="button" tabindex="0" title="검색으로 돌아가기">
+        <span class="tb-back" aria-hidden="true">←</span>
+        <span class="tb-title">숲으로 바다로 — 장소·시설 검색</span>
+      </div>
+      <div id="chips-bar"><!-- JS가 카테고리 칩 생성 --></div>
+      <div id="sheet" class="peek">
+        <div id="sheet-handle"><span></span></div>
+        <div id="sheet-head">현재 지도 중심 <b id="sheet-count">0</b>곳 · 가까운 순</div>
+        <div id="sheet-body"><div id="sheet-list"></div></div>
+      </div>
+
+      <!-- 좌측 스택: 레이어 컨트롤 + 그 아래 상세 카드 -->
+      <div id="left-stack">
+        <div id="map-controls">
+          <div class="mc-head">
+            <span>레이어</span>
+            <button id="clear-layers" type="button">모두 선택</button>
+          </div>
+          <div class="layer-toggles">
+            <label><input type="checkbox" value="restroom" /> <span class="dot restroom"></span> 🚻 화장실</label>
+            <label><input type="checkbox" value="camping" /> <span class="dot camping"></span> ⛺ 야영장</label>
+            <label><input type="checkbox" value="beach" /> <span class="dot beach"></span> 🏖️ 해수욕장</label>
+            <label><input type="checkbox" value="parking_public,parking" /> <span class="dot parking_public"></span> 🅿️ 주차장</label>
+            <label><input type="checkbox" value="festival" /> <span class="dot festival"></span> 🎉 행사·축제</label>
+            <div class="layer-group">제주 특화</div>
+            <label><input type="checkbox" value="nakji" /> <span class="dot nakji"></span> 🏕️ 노지(공공 빈터)</label>
+            <label><input type="checkbox" value="cctv" /> <span class="dot cctv"></span> 📹 안전 CCTV</label>
+            <label><input type="checkbox" value="pharmacy" /> <span class="dot pharmacy"></span> 💊 심야약국</label>
+            <label><input type="checkbox" value="cleanhouse" /> <span class="dot cleanhouse"></span> ♻️ 클린하우스</label>
+            <label><input type="checkbox" value="ev_charger" /> <span class="dot ev_charger"></span> 🔌 전기차 충전소</label>
+          </div>
+        </div>
+
+        <!-- 마커 상세 (레이어 패널 아래) -->
+        <div id="detail" class="detail hidden"></div>
+      </div>
+
+      <button id="map-fullscreen" type="button" title="지도 전체화면">⛶</button>
+
+      <!-- 추천 답변 배너 (채팅 → 지도 전환 시 하단 표시, JS가 채움) -->
+      <div id="rec-banner"></div>
+
+      <!-- 로드뷰 -->
+      <div id="roadview" class="hidden">
+        <button id="roadview-close">✕ 닫기</button>
+        <div id="roadview-canvas"></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- HLS 재생 (제주 월파 CCTV .m3u8 실시간 스트림) — Chrome은 네이티브 미지원이라 필요 -->
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.17/dist/hls.min.js"></script>
+  <!-- 임시 추천 스코어링 엔진 (P2, docs/scoring-design.md) — app.js보다 먼저 로드 -->
+  <script src="/static/scoring.js?v=4"></script>
+  <script src="/static/app.js?v=47"></script>
+</body>
+</html>

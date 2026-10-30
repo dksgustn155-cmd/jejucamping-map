@@ -1,0 +1,141 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" font-family="Pretendard, 'Malgun Gothic', sans-serif">
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M1 1L9 5L1 9z" fill="#6b7570"/>
+    </marker>
+    <marker id="arg" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M1 1L9 5L1 9z" fill="#2d7d46"/>
+    </marker>
+  </defs>
+
+  <rect width="1280" height="720" fill="#ffffff"/>
+
+  <!-- ══ 질문 학습 루프 (상단 점선) ══ -->
+  <path d="M1115 150 V70 H400 V150" fill="none" stroke="#c8871a" stroke-width="2" stroke-dasharray="7 5" marker-end="url(#ar)"/>
+  <rect x="560" y="46" width="400" height="34" rx="17" fill="#fdf3e3" stroke="#e5c891"/>
+  <text x="760" y="68" text-anchor="middle" font-size="14" fill="#8a6414">🔁 질문 학습 루프 — 클릭·👍 로그로 가중치·지식베이스 주간 자동 갱신</text>
+
+  <!-- ══ 메인 플로우 (6단계) ══ -->
+  <!-- 1. 사용자 질문 -->
+  <g>
+    <rect x="40" y="150" width="180" height="130" rx="14" fill="#f4f7f5" stroke="#cfd8d2" stroke-width="1.5"/>
+    <text x="130" y="182" text-anchor="middle" font-size="17" font-weight="700" fill="#1f2823">💬 사용자 질문</text>
+    <text x="130" y="212" text-anchor="middle" font-size="12.5" fill="#556058" font-style="italic">"애월로 차박,</text>
+    <text x="130" y="230" text-anchor="middle" font-size="12.5" fill="#556058" font-style="italic">전기차인데 화장실</text>
+    <text x="130" y="248" text-anchor="middle" font-size="12.5" fill="#556058" font-style="italic">가까운 조용한 곳"</text>
+  </g>
+  <line x1="220" y1="215" x2="248" y2="215" stroke="#6b7570" stroke-width="2" marker-end="url(#ar)"/>
+
+  <!-- 2. 조건 파싱 -->
+  <g>
+    <rect x="252" y="150" width="180" height="130" rx="14" fill="#e8f3ec" stroke="#2d7d46" stroke-width="1.8"/>
+    <text x="342" y="180" text-anchor="middle" font-size="16" font-weight="700" fill="#1f5a34">① 조건 파싱</text>
+    <text x="342" y="203" text-anchor="middle" font-size="12.5" fill="#2d7d46" font-weight="600">gpt-5-mini · function calling</text>
+    <text x="342" y="228" text-anchor="middle" font-size="12.5" fill="#446b52">지역 · 날짜 · 전기차</text>
+    <text x="342" y="246" text-anchor="middle" font-size="12.5" fill="#446b52">· 선호(계곡/바다/조용)</text>
+  </g>
+  <line x1="432" y1="215" x2="460" y2="215" stroke="#6b7570" stroke-width="2" marker-end="url(#ar)"/>
+
+  <!-- 3. 후보·적합도 -->
+  <g>
+    <rect x="464" y="150" width="185" height="130" rx="14" fill="#e7f1f8" stroke="#1487a0" stroke-width="1.8"/>
+    <text x="556" y="180" text-anchor="middle" font-size="16" font-weight="700" fill="#0c5a6b">② 후보 · 적합도</text>
+    <text x="556" y="203" text-anchor="middle" font-size="12.5" fill="#1487a0" font-weight="600">SQLite · 공공데이터 86,723건</text>
+    <text x="556" y="228" text-anchor="middle" font-size="12.5" fill="#3a6b78">화장실 근접 · 뷰 · 침수안전</text>
+    <text x="556" y="246" text-anchor="middle" font-size="12.5" fill="#3a6b78">· 혼잡(축제) 신호 점수화</text>
+  </g>
+  <line x1="649" y1="215" x2="677" y2="215" stroke="#6b7570" stroke-width="2" marker-end="url(#ar)"/>
+
+  <!-- 4. 근거 검색 -->
+  <g>
+    <rect x="681" y="150" width="185" height="130" rx="14" fill="#e7f1f8" stroke="#1487a0" stroke-width="1.8"/>
+    <text x="773" y="178" text-anchor="middle" font-size="16" font-weight="700" fill="#0c5a6b">③ 근거 검색</text>
+    <text x="773" y="200" text-anchor="middle" font-size="12.5" fill="#1487a0" font-weight="600">RAG · FAISS 임베딩</text>
+    <text x="773" y="223" text-anchor="middle" font-size="12.5" fill="#3a6b78">법령·조례·고시 330여 건</text>
+    <text x="773" y="241" text-anchor="middle" font-size="12.5" fill="#3a6b78">GIS 좌표판정 · 공원 154구역</text>
+    <text x="773" y="263" text-anchor="middle" font-size="11.5" fill="#7b8a90">(지역 인지: 그 지자체 조례 우선)</text>
+  </g>
+  <line x1="866" y1="215" x2="894" y2="215" stroke="#6b7570" stroke-width="2" marker-end="url(#ar)"/>
+
+  <!-- 5. 답변 생성 -->
+  <g>
+    <rect x="898" y="150" width="180" height="130" rx="14" fill="#e8f3ec" stroke="#2d7d46" stroke-width="1.8"/>
+    <text x="988" y="180" text-anchor="middle" font-size="16" font-weight="700" fill="#1f5a34">④ 답변 생성</text>
+    <text x="988" y="203" text-anchor="middle" font-size="12.5" fill="#2d7d46" font-weight="600">gpt-5-mini</text>
+    <text x="988" y="228" text-anchor="middle" font-size="12.5" fill="#446b52">전달된 근거·점수만 인용</text>
+    <text x="988" y="246" text-anchor="middle" font-size="12.5" fill="#446b52">(환각 방지 프롬프트)</text>
+  </g>
+  <line x1="1078" y1="215" x2="1106" y2="215" stroke="#2d7d46" stroke-width="2.5" marker-end="url(#arg)"/>
+
+  <!-- 6. 지도+답변 -->
+  <g>
+    <rect x="1110" y="150" width="140" height="130" rx="14" fill="#2d7d46" stroke="#1f5a34" stroke-width="1.5"/>
+    <text x="1180" y="185" text-anchor="middle" font-size="16" font-weight="700" fill="#ffffff">🗺️ 지도 + 답변</text>
+    <text x="1180" y="212" text-anchor="middle" font-size="12" fill="#d7ecdd">추천 핀 · 적합 리포트</text>
+    <text x="1180" y="230" text-anchor="middle" font-size="12" fill="#d7ecdd">법령 인용 · 로드뷰</text>
+    <text x="1180" y="248" text-anchor="middle" font-size="12" fill="#d7ecdd">· 실시간 CCTV</text>
+  </g>
+
+  <!-- ══ 데이터층 (하단) ══ -->
+  <text x="40" y="360" font-size="15" font-weight="700" fill="#556058">데이터 파이프라인</text>
+
+  <!-- 정적: 공공 API → 배치 → 저장소 -->
+  <g>
+    <rect x="40" y="380" width="200" height="86" rx="12" fill="#f4f7f5" stroke="#cfd8d2" stroke-width="1.5"/>
+    <text x="140" y="408" text-anchor="middle" font-size="14" font-weight="700" fill="#1f2823">🏛️ 공공데이터 API 11종</text>
+    <text x="140" y="430" text-anchor="middle" font-size="12" fill="#556058">화장실·주차장·야영장·축제…</text>
+    <text x="140" y="448" text-anchor="middle" font-size="12" fill="#556058">+ 법령·조례(법제처) · 경계(WFS)</text>
+  </g>
+  <line x1="240" y1="423" x2="268" y2="423" stroke="#6b7570" stroke-width="2" marker-end="url(#ar)"/>
+  <g>
+    <rect x="272" y="380" width="190" height="86" rx="12" fill="#f4f7f5" stroke="#cfd8d2" stroke-width="1.5"/>
+    <text x="367" y="408" text-anchor="middle" font-size="14" font-weight="700" fill="#1f2823">⚙️ 수집·정규화 배치</text>
+    <text x="367" y="430" text-anchor="middle" font-size="12" fill="#556058">좌표계 통일(EPSG 4종)</text>
+    <text x="367" y="448" text-anchor="middle" font-size="12" fill="#556058">지오코딩 · 검증 (월간)</text>
+  </g>
+  <line x1="462" y1="423" x2="490" y2="423" stroke="#6b7570" stroke-width="2" marker-end="url(#ar)"/>
+  <!-- 저장소 실린더 2개 -->
+  <g>
+    <path d="M494 392 a45 10 0 0 1 90 0 v56 a45 10 0 0 1 -90 0 z" fill="#e7f1f8" stroke="#1487a0" stroke-width="1.6"/>
+    <ellipse cx="539" cy="392" rx="45" ry="10" fill="#d3e8f2" stroke="#1487a0" stroke-width="1.6"/>
+    <text x="539" y="425" text-anchor="middle" font-size="13" font-weight="700" fill="#0c5a6b">SQLite</text>
+    <text x="539" y="442" text-anchor="middle" font-size="11" fill="#3a6b78">시설 86,723</text>
+  </g>
+  <g>
+    <path d="M604 392 a45 10 0 0 1 90 0 v56 a45 10 0 0 1 -90 0 z" fill="#e7f1f8" stroke="#1487a0" stroke-width="1.6"/>
+    <ellipse cx="649" cy="392" rx="45" ry="10" fill="#d3e8f2" stroke="#1487a0" stroke-width="1.6"/>
+    <text x="649" y="425" text-anchor="middle" font-size="13" font-weight="700" fill="#0c5a6b">FAISS</text>
+    <text x="649" y="442" text-anchor="middle" font-size="11" fill="#3a6b78">규정 임베딩</text>
+  </g>
+  <!-- 저장소 → 메인플로우 위로 -->
+  <line x1="539" y1="380" x2="551" y2="284" stroke="#1487a0" stroke-width="1.8" stroke-dasharray="4 3" marker-end="url(#ar)"/>
+  <line x1="672" y1="380" x2="760" y2="284" stroke="#1487a0" stroke-width="1.8" stroke-dasharray="4 3" marker-end="url(#ar)"/>
+
+  <!-- 실시간 -->
+  <g>
+    <rect x="760" y="380" width="200" height="86" rx="12" fill="#fdf3e3" stroke="#e5c891" stroke-width="1.5"/>
+    <text x="860" y="408" text-anchor="middle" font-size="14" font-weight="700" fill="#8a6414">⚡ 실시간 API</text>
+    <text x="860" y="430" text-anchor="middle" font-size="12" fill="#9a7a2a">전기차 가용 · CCTV 영상 · 기상</text>
+    <text x="860" y="448" text-anchor="middle" font-size="12" fill="#9a7a2a">TTL 캐시(3~30분)로 폭주 방지</text>
+  </g>
+  <line x1="960" y1="423" x2="1160" y2="284" stroke="#c8871a" stroke-width="1.8" stroke-dasharray="4 3" marker-end="url(#ar)"/>
+  <text x="1085" y="345" font-size="11.5" fill="#9a7a2a">서빙 시 결합</text>
+
+  <!-- ══ 인프라 스트립 ══ -->
+  <rect x="40" y="530" width="1210" height="120" rx="14" fill="#f7f9f8" stroke="#e4e9e6"/>
+  <text x="70" y="565" font-size="15" font-weight="700" fill="#556058">☁️ Google Cloud</text>
+  <g font-size="13">
+    <rect x="70" y="582" width="250" height="46" rx="10" fill="#ffffff" stroke="#cfd8d2"/>
+    <text x="195" y="602" text-anchor="middle" font-weight="700" fill="#1f2823">Cloud Run — 서버리스 서빙</text>
+    <text x="195" y="620" text-anchor="middle" fill="#556058" font-size="11.5">트래픽 없으면 비용 0원</text>
+    <rect x="340" y="582" width="250" height="46" rx="10" fill="#ffffff" stroke="#cfd8d2"/>
+    <text x="465" y="602" text-anchor="middle" font-weight="700" fill="#1f2823">Cloud Build — 자동 빌드·배포</text>
+    <text x="465" y="620" text-anchor="middle" fill="#556058" font-size="11.5">push → 컨테이너 → 배포</text>
+    <rect x="610" y="582" width="250" height="46" rx="10" fill="#ffffff" stroke="#cfd8d2"/>
+    <text x="735" y="602" text-anchor="middle" font-weight="700" fill="#1f2823">Cloud Scheduler — 데이터 갱신</text>
+    <text x="735" y="620" text-anchor="middle" fill="#556058" font-size="11.5">월간 배치 · 주간 규정 수집</text>
+    <rect x="880" y="582" width="370" height="46" rx="10" fill="#ffffff" stroke="#cfd8d2"/>
+    <text x="1065" y="602" text-anchor="middle" font-weight="700" fill="#1f2823">🔒 보안 — 키 분리(.env)·CI 유출검사·로그 익명</text>
+    <text x="1065" y="620" text-anchor="middle" fill="#556058" font-size="11.5">XSS 이스케이프 · 종료 후 전 키 재발급</text>
+  </g>
+</svg>

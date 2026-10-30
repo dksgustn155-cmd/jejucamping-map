@@ -1,0 +1,37 @@
+name: CI
+
+# main에 push 하거나 PR 올릴 때마다 자동 실행 → 깨진 코드 조기 발견
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    name: 코드 검사
+    runs-on: ubuntu-latest
+    steps:
+      - name: 저장소 체크아웃
+        uses: actions/checkout@v4
+
+      - name: 파이썬 설치
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 문법 검사 (전체 .py 컴파일)
+        run: python -m compileall -q backend data_pipeline
+
+      - name: 백엔드 import 스모크 테스트
+        run: |
+          pip install --quiet fastapi "uvicorn[standard]"
+          python -c "import backend.main; print('backend.main import OK')"
+
+      - name: 비밀키 유출 검사 (커밋에 키가 들어갔는지)
+        run: |
+          if grep -rIn "KakaoAK [0-9a-f]\{32\}\|serviceKey=[0-9a-zA-Z%]\{40\}" \
+             --include="*.py" --include="*.js" --include="*.html" --include="*.md" .; then
+            echo "::error::소스에 키가 노출된 것 같습니다. .env로 옮기세요."
+            exit 1
+          fi
+          echo "키 노출 없음 ✅"

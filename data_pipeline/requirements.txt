@@ -1,0 +1,6 @@
+# 데이터 수집·가공 전용 의존성 (팀원 D, 재수집할 때만 필요)
+# 앱 실행에는 불필요 → 루트 requirements.txt 로 서버는 돌아감
+# 설치: pip install -r data_pipeline/requirements.txt
+
+pyproj>=3.7.1                  # 좌표계 변환 (LOCALDATA TM중부·둔치 UTM-K → WGS84). 3.7+ 라야 파이썬 3.13 wheel 있음
+google-cloud-bigquery>=3.25    # BigQuery 적재 + GIS (stretch)

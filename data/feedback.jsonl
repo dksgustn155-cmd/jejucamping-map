@@ -1,0 +1,16 @@
+{"ts": "2026-07-09T20:14:53", "vote": "up", "region": "서귀포", "priorities": null, "spot_id": null, "spot_name": "테스트빈터", "category": "nakji"}
+{"ts": "2026-07-09T20:17:28", "vote": "up", "region": "서귀포", "priorities": ["seclusion", "view"], "spot_id": "parking_public:406-2-000048", "spot_name": "서홍동 공영주차장", "category": "parking_public"}
+{"ts": "2026-07-09T21:11:04", "vote": "down", "region": null, "priorities": null, "user_id": "umrdgpi0jc5j09f", "spot_id": "nakji:5013031024100110011", "spot_name": "11-11", "category": "nakji"}
+{"ts": "2026-07-09T21:11:16", "vote": "down", "region": null, "priorities": null, "user_id": "umrdgpi0jc5j09f", "spot_id": "nakji:5013031028100050127", "spot_name": "5-127", "category": "nakji"}
+{"ts": "2026-07-09T21:11:44", "vote": "down", "region": null, "priorities": null, "user_id": "umrdgpi0jc5j09f", "spot_id": "nakji:5011025340116240008", "spot_name": "1624-8", "category": "nakji"}
+{"ts": "2026-07-09T21:11:56", "vote": "down", "region": null, "priorities": null, "user_id": "umrdgpi0jc5j09f", "spot_id": "nakji:5011025340116240003", "spot_name": "1624-3", "category": "nakji"}
+{"ts": "2026-07-09T21:12:03", "vote": "down", "region": null, "priorities": null, "user_id": "umrdgpi0jc5j09f", "spot_id": "nakji:5011025340116240009", "spot_name": "1624-9", "category": "nakji"}
+{"ts": "2026-07-09T21:12:19", "vote": "down", "region": null, "priorities": null, "user_id": "umrdgpi0jc5j09f", "spot_id": "nakji:5011025340116290004", "spot_name": "1629-4", "category": "nakji"}
+{"ts": "2026-07-09T21:12:30", "vote": "down", "region": null, "priorities": null, "user_id": "umrdgpi0jc5j09f", "spot_id": "nakji:5011025340116290006", "spot_name": "1629-6", "category": "nakji"}
+{"ts": "2026-07-09T21:13:09", "vote": "up", "region": null, "priorities": null, "user_id": "umrdgpi0jc5j09f", "spot_id": "nakji:5011025340103890006", "spot_name": "389-6", "category": "nakji"}
+{"ts": "2026-07-09T21:13:33", "vote": "down", "region": null, "priorities": null, "user_id": "umrdgpi0jc5j09f", "spot_id": "nakji:5011025340103830002", "spot_name": "383-2", "category": "nakji"}
+{"ts": "2026-07-09T21:13:58", "vote": "down", "region": null, "priorities": null, "user_id": "umrdgpi0jc5j09f", "spot_id": "nakji:5011025340103190001", "spot_name": "319-1", "category": "nakji"}
+{"ts": "2026-07-09T21:14:16", "vote": "up", "region": null, "priorities": null, "user_id": "umrdgpi0jc5j09f", "spot_id": "nakji:5011014000105330008", "spot_name": "533-8", "category": "nakji"}
+{"ts": "2026-07-09T21:14:39", "vote": "up", "region": null, "priorities": null, "user_id": "umrdgpi0jc5j09f", "spot_id": "nakji:5011014000105330010", "spot_name": "533-10", "category": "nakji"}
+{"ts": "2026-07-09T21:14:55", "vote": "down", "region": null, "priorities": null, "user_id": "umrdgpi0jc5j09f", "spot_id": "nakji:5011014000105130002", "spot_name": "513-2", "category": "nakji"}
+{"ts": "2026-07-09T21:15:22", "vote": "up", "region": null, "priorities": null, "user_id": "umrdgpi0jc5j09f", "spot_id": "nakji:5011012500104310002", "spot_name": "431-2", "category": "nakji"}

@@ -1,0 +1,17 @@
+{
+  "name": "숲으로 바다로 — 차박·캠핑 편의시설 지도",
+  "short_name": "숲으로 바다로",
+  "description": "떠나고 싶은 곳의 공공 편의시설·안전정보를 알려주는 서비스",
+  "lang": "ko",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#2d7d46",
+  "background_color": "#e8efe9",
+  "icons": [
+    { "src": "/static/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/static/icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/static/icons/icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

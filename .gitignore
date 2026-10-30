@@ -1,0 +1,40 @@
+.env
+.env.*
+!.env.example
+# 비밀키 — 절대 커밋 금지
+*.key
+credentials.json
+*-service-account*.json
+
+# 데이터 — facilities.db(43MB)와 RAG jsonl은 소규모 팀 편의로 커밋(공개 정부데이터, 비민감)
+#   → 팀원은 clone만 하면 실행 가능. .env(키)만 카톡 DM으로 별도 공유
+# 대용량 중간 산출물(restroom.jsonl 63MB 등)·WAL·parquet·CSV는 계속 제외
+data/*.db-wal
+data/*.db-shm
+data/*.parquet
+data/gis/공원경계버퍼/
+data/raw/*
+!data/raw/camping.jsonl
+!data/raw/festival.jsonl
+!data/raw/festival_std.jsonl
+!data/raw/city_tour.jsonl
+!data/raw/theme_park.jsonl
+!data/raw/hanok_stay.jsonl
+!data/raw/tourinfo.jsonl
+!data/raw/regulations.jsonl
+!data/raw/ordinances.jsonl
+!data/raw/notices.jsonl
+!data/raw/notices_api.jsonl
+*.csv
+
+# 파이썬
+__pycache__/
+*.pyc
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# OS / 에디터
+.DS_Store
+Thumbs.db
+.vscode/

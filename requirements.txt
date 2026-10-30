@@ -1,0 +1,22 @@
+# 앱 실행에 필요한 의존성 (팀원 전원 · 온보딩 노트북이 설치하는 것)
+# → 순수 파이썬이라 어떤 파이썬 버전에서도 바로 설치됩니다.
+
+# 웹 서버 (지도·API 서빙)
+fastapi>=0.115
+uvicorn[standard]>=0.35       # fastmcp 3.4 가 uvicorn>=0.35 요구 (0.30.6 핀이면 설치 충돌)
+
+# RAG + GPT 대화 (/api/chat·/api/recommend 가 B의 rag 파이프라인 사용 — 7/9 통합)
+# ⚠️ Python 3.12 권장 (torch/faiss wheel 호환). 3.14는 미지원일 수 있음
+sentence-transformers>=3.0
+faiss-cpu>=1.14              # 1.8.x는 numpy 2와 비호환(ImportError) — 1.14+ 필요
+openai>=1.51                 # gpt-5-mini 호출 (rag/gpt_answer.py)
+python-dotenv
+langchain-core
+
+# MCP 브리지 (backend/chat.py — GPT가 도구를 발견·호출)
+fastmcp>=3.4
+fastapi-mcp>=0.4
+
+# ── 아래는 필요할 때만 추가 설치 ──────────────────────────────
+# 데이터 수집·좌표변환·BigQuery (팀원 D 재수집 시):
+#     pip install -r data_pipeline/requirements.txt
